@@ -1,50 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-	<head>
-		<title>goopz with bing maps</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<style>	
-			html, body { height: 100%; width: 100%; margin: 0; }
-		</style>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-		<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-		<script type="text/javascript">
-		
-			function getMap() {
-				var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'Ah0k8PKqcZTJsD12xoHSVy1kc-boQ53Vpj_zOlTiJup1yXMfVEmaXevdWEsCTqke'});
-				var locations = [];
+<head>
+    <title>jeepex</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <script type="text/javascript">
 
-				$.ajax({
-					type: "GET",
-					url: "/../gpx/first.gpx",
-					dataType: "xml",
-					success: function(xml) {
-						var points = [];
+        function getMap() {
+            var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {credentials: 'Ah0k8PKqcZTJsD12xoHSVy1kc-boQ53Vpj_zOlTiJup1yXMfVEmaXevdWEsCTqke'});
+            var locations = [];
 
-						$(xml).find("trkpt").each(function() {
-							var lat = $(this).attr("lat");
-							var lon = $(this).attr("lon");
-							var p = new Microsoft.Maps.Location(lat, lon);
-	 						locations.push(p);
-						});
+            $.ajax({
+                type: "GET",
+                url: "/../gpx/first.gpx",
+                dataType: "xml",
+                success: function (xml) {
+                    var points = [];
 
-						var polyline = new Microsoft.Maps.Polyline(locations, null); 
-					
-						map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(locations)});
-					
-						map.setView({bounds: Microsoft.Maps.Loca}); 
-						map.entities.push(polyline);
+                    $(xml).find("trkpt").each(function () {
+                        var lat = $(this).attr("lat");
+                        var lon = $(this).attr("lon");
+                        var p = new Microsoft.Maps.Location(lat, lon);
+                        locations.push(p);
+                    });
 
-					}
-				});
-			}   
-		</script>
-	</head>
+                    var polyline = new Microsoft.Maps.Polyline(locations, null);
+
+                    map.setView({ bounds: Microsoft.Maps.LocationRect.fromLocations(locations)});
+
+                    map.setView({bounds: Microsoft.Maps.Loca});
+                    map.entities.push(polyline);
+
+                }
+            });
+        }
+    </script>
+</head>
 <body onload="getMap();">
-	<div id='selectMaps' style="position:relative; width:100%; height:5%; background-color:grey;">
-		
-	</div>
-	<div id='myMap' style="position:relative; width:100%; height:75%"></div>
+<div id='selectMaps' style="position:relative; width:100%; height:5%; background-color:grey;">
+         jeeepex - your gpx stats live here!
+</div>
+<div id='myMap' style="position:relative; width:100%; height:75%"></div>
 </body>
 </html>
 
